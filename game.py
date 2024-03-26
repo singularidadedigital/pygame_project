@@ -8,17 +8,21 @@ from pygame.locals import *
 # pygame setup
 pygame.init()
 
-WIDTH = 500
-HEIGHT = 320
+WIDTH = 800
+HEIGHT = 500
 
 screen = display.set_mode(size=(WIDTH, HEIGHT))
+
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 40)
 dt = 0
+pygame.display.set_caption("Noa Genesis - A Rodrigo Luciano Costa New Game")
+scale = 2
+# load buttons
 
 # carregar imagem de fundo
 background = load('images/nature_5/orig.png')
-
+background = pygame.transform.scale(background, (int(800), (int(500))))
 # Music
 pygame.mixer.music.load("assets/EssentialGameAudiopack/FullScores/Orchestral Scores/Ove_Melaa-Heaven_Sings.mp3")
 pygame.mixer.music.play(-1)
