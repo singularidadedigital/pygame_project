@@ -6,6 +6,8 @@ from pygame.image import load
 from pygame.locals import *
 
 # pygame setup
+import buttons
+
 pygame.init()
 
 WIDTH = 800
@@ -16,9 +18,8 @@ screen = display.set_mode(size=(WIDTH, HEIGHT))
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 40)
 dt = 0
-pygame.display.set_caption("Noa Genesis - A Rodrigo Luciano Costa New Game")
+pygame.display.set_caption("Nova Genesis - A Rodrigo Luciano Costa New Game")
 scale = 2
-# load buttons
 
 # carregar imagem de fundo
 background = load('images/nature_5/orig.png')
@@ -35,33 +36,10 @@ def draw_text(text, font, color, surface, x, y):
     textrect.topright = (x, y)
     surface.blit(textobj, textrect)
 
-
 click = False
-
 
 def main_menu():
     while True:
-
-        # text menu
-        draw_text('Nova Genesis', font, (255, 255, 255), screen, 455, 20)
-
-        mx, my = pygame.mouse.get_pos()
-
-        # Button 1
-        button_1 = pygame.Rect(50, 100, 200, 50)
-        button_2 = pygame.Rect(50, 200, 200, 50)
-
-        if button_1.collidepoint((mx, my)):
-            if click:
-                game()
-        if button_2.collidepoint((mx, my)):
-            if click:
-                options()
-
-        pygame.draw.rect(screen, (255, 0, 0), button_1)
-        pygame.draw.rect(screen, (255, 0, 0), button_2)
-
-        click = False
 
         # poll for events
         # pygame QUIT event means the user clicked X to close windows
@@ -83,7 +61,25 @@ def main_menu():
         screen.blit(background, (0, 0))
 
         # text menu
-        draw_text('Nova Genesis', font, (255, 255, 255), screen, 200, 20)
+        draw_text('Nova Genesis', font, (255, 255, 255), screen, 230, 70)
+
+        # load button images
+        start_image = pygame.image.load('images/start_btn.png.png').convert_alpha()
+        options_image = pygame.image.load('images/option_btn.png').convert_alpha()
+
+
+        # create button instances
+        start_button = buttons.Button(650, 50, start_image, 0.20)
+        options_button = buttons.Button(650, 150, options_image, 0.20)
+
+        if start_button.draw(screen):
+            print('START')
+            # run = False
+
+        if options_button.draw(screen):
+            print('OPTIONS')
+
+
         pygame.display.update()
 
         # LIMIT FPS
